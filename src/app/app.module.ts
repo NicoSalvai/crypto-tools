@@ -10,6 +10,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ConfigComponent } from './components/config/config.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { AxieComponent } from './components/axie/axie.component';
 
 
 
@@ -19,7 +20,8 @@ import { environment } from '../environments/environment';
     PlantsComponent,
     NavbarComponent,
     AboutComponent,
-    ConfigComponent
+    ConfigComponent,
+    AxieComponent
   ],
   imports: [
     BrowserModule,
