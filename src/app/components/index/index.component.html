@@ -1,33 +1,6 @@
 <div class="container">
-  <div class="bg-light p-5 rounded">
-    <h1>Test</h1>
-    <p class="lead">Test</p>
-    <div class="container">
-      <input type="text" id="load_form_input" class="col-5" #jsonInput>
-      <div class="row">
-        <button class="btn btn-success col-3 " (click)="addJson(jsonInput.value)" >submit</button>
-      </div>
+    <div class="bg-light p-5 rounded">
+      <h1>Welcome</h1>
+      <p class="lead">Welcome</p>
     </div>
-    <div class="container">
-    <div >
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">PlantId</th>
-            <th scope="col">Restart</th>
-            <th scope="col">Page</th>
-            <th scope="col">Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let plant of plants; index as i; first as isFirst">
-            <th scope="row">{{plant.plantId}}</th>
-            <td>{{plant.startTime}}</td>
-            <td>{{plant.page}}</td>
-            <td><a class="btn btn-small btn-info" (click)="goToLink(plant.owner)">Go</a></td>
-          </tr>
-        </tbody>
-    </table>
-  </div>
-  </div>
 </div>
