@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AngularFireModule } from '@angular/fire';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { environment } from '../environments/environment';
+
 import { PlantsComponent } from './components/plants/plants.component';
 import { IndexComponent } from './components/index/index.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AboutComponent } from './components/about/about.component';
 import { ConfigComponent } from './components/config/config.component';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
 import { AxieComponent } from './components/axie/axie.component';
-
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { AxieComponent } from './components/axie/axie.component';
     NavbarComponent,
     AboutComponent,
     ConfigComponent,
-    AxieComponent
+    AxieComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,

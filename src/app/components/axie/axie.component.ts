@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AxieZoneService } from 'src/app/services/axie-zone/axie-zone.service';
 
 @Component({
   selector: 'app-axie',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AxieComponent implements OnInit {
 
-  constructor() { }
+  axieCards: any[] = [];
+
+  constructor(private axieZoneService: AxieZoneService) { }
+  //constructor() { }
 
   ngOnInit(): void {
+    //this.axieZoneService.getAxieCards();
   }
+
+
 
 }

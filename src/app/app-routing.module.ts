@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'plants', component: PlantsComponent },
   { path: 'config', component: ConfigComponent },
   { path: 'index', component: IndexComponent },
-  { path: 'axie', component: AxieComponent }
+  { path: 'axies', component: AxieComponent },
+  {path: '', redirectTo: '/index', pathMatch: 'full' }
 ];
 
 @NgModule({
