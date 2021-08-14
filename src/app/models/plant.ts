@@ -1,12 +1,12 @@
 export class Plant {
-    plantId: number;
-    startTime: Date;
+    plant_id: number;
+    start_time: Date;
     page: number;
-    owner: string;
-    constructor(plantId: number, startTime: Date, page: number, owner: string){
-        this.plantId = plantId;
-        this.startTime = startTime;
+    owner_id: string;
+    constructor(plant_id: number, start_time: Date, page: number, owner_id: string){
+        this.plant_id = plant_id;
+        this.start_time = start_time;
         this.page = page;
-        this.owner = owner;
+        this.owner_id = owner_id;
     }
 }

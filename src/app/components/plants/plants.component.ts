@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Plant } from '../../models/plant'
-import { FirestoreService } from 'src/app/services/firestore/firestore.plants.service';
-
+import { Plant } from '../../models/plant';
+import { PlantPgService } from '../../services/pg/plant-pg.service';
 
 @Component({
   selector: 'app-index',
@@ -14,20 +13,15 @@ export class PlantsComponent implements OnInit {
 
   plants: Plant[] = [];
 
-  constructor(private firestoreService: FirestoreService) { }
+  constructor(private plantPgService: PlantPgService) { }
 
   ngOnInit(): void {
-    console.log("init")
-    this.firestoreService.getPlants().subscribe((plantsSnapshot) => {
-      this.plants = [];
-      plantsSnapshot.forEach((plantData: any) => {
-        console.log(plantData)
-        let plant = new Plant(plantData.payload.doc.plantId, plantData.payload.doc.startTime, plantData.payload.doc.page, plantData.payload.doc.ownerId)
-        console.log(plant)
-        this.plants.push(plant);
-      })
+    //this.plantPgService.getPlants()
+    this.plantPgService.getPlants().subscribe((res : any) => {
+      console.log(res)
+      this.plants = res;
+      console.log(this.plants);
     });
-
   }
 
   public addJson(jsonInput: any) {
@@ -38,12 +32,11 @@ export class PlantsComponent implements OnInit {
     }
     console.log(this.plants)
     this.plants = this.plants.sort((a, b) => {
-      return <any>new Date(a.startTime) - <any>new Date(b.startTime);
+      return <any>new Date(a.start_time) - <any>new Date(b.start_time);
     });
-
   }
 
   public goToLink(url: string){
-    window.open("https://marketplace.plantvsundead.com/farm/other/" + url, "_blank");
+    window.open("https://marketplace.plantvsundead.com/farm#/farm/other/" + url, "_blank");
   }
 }

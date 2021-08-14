@@ -21,10 +21,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let plant of plants; index as i; first as isFirst">
-            <th scope="row">{{plant.plantId}}</th>
-            <td>{{plant.startTime}}</td>
+            <th scope="row">{{plant.plant_id}}</th>
+            <td>{{plant.start_time}}</td>
             <td>{{plant.page}}</td>
-            <td><a class="btn btn-small btn-info" (click)="goToLink(plant.owner)">Go</a></td>
+            <td><a class="btn btn-small btn-info" (click)="goToLink(plant.owner_id)">Go</a></td>
           </tr>
         </tbody>
     </table>
