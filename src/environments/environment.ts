@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  page_title: 'Crypto Tools',
+  page_title: 'NFT Gaming Tools',
   firebase: {
     apiKey: "AIzaSyCXV4lkUW1JgcwUk1-VyuayoHFjMUBBX9U",
     authDomain: "nft-gaming-tools.firebaseapp.com",
