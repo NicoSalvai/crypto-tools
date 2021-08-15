@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant } from '../../models/plant';
-import { PlantPgService } from '../../services/pg/plant-pg.service';
 
 @Component({
   selector: 'app-index',
@@ -13,16 +12,9 @@ export class PlantsComponent implements OnInit {
 
   plants: Plant[] = [];
 
-  constructor(private plantPgService: PlantPgService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    //this.plantPgService.getPlants()
-    this.plantPgService.getPlants().subscribe((res : any) => {
-      console.log(res)
-      this.plants = res;
-      console.log(this.plants);
-    });
-  }
+  ngOnInit(): void {  }
 
   public addJson(jsonInput: any) {
     var data = JSON.parse(jsonInput);
