@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AxieZoneService } from './axie-zone.service';
+import { AxiecardService } from './axiecard.service';
 
-describe('AxieZoneService', () => {
-  let service: AxieZoneService;
+describe('AxiecardService', () => {
+  let service: AxiecardService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AxieZoneService);
+    service = TestBed.inject(AxiecardService);
   });
 
   it('should be created', () => {

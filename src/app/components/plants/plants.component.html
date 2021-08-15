@@ -16,7 +16,7 @@
         <tbody>
           <tr *ngFor="let plant of plants; index as i; first as isFirst">
             <th scope="row">{{plant.plant_id}}</th>
-            <td>{{plant.start_time | date: 'mediumTime':'-03'}}</td>
+            <td>{{plant.hour}}:{{plant.minute}}:{{plant.second}}</td>
             <td>{{plant.page}}</td>
             <td><a class="btn btn-small btn-info" (click)="goToFarm(plant.owner_id)">Go to land</a></td>
             <td><a class="btn btn-small btn-info" (click)="goToPlant(plant.id)">Go to Plant</a></td>

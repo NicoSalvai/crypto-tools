@@ -14,6 +14,10 @@ export class PlantsService {
     return this.firestore.collection('plants').snapshotChanges();
   }
 
+  public getPlantsFilterBy(hour: number){
+    return this.firestore.collection('plants', ref => ref.where('hour','==', hour)).valueChanges();
+  }
+
   public updatePlant(documentId: string, data: Plant) {
     return this.firestore.collection('plants').doc(documentId).set(data);
   }
@@ -27,5 +31,4 @@ export class PlantsService {
     console.log(data, plant_id)
     return this.firestore.collection('plants').doc(plant_id).set(data);
   }
-
 }

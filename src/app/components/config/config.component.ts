@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant } from '../../models/plant';
 import { PlantsService } from '../../services/firebase/plants.service';
+import { AxieCardService } from '../../services/firebase/axiecard.service';
 
 @Component({
   selector: 'app-config',
@@ -9,27 +10,38 @@ import { PlantsService } from '../../services/firebase/plants.service';
 })
 export class ConfigComponent implements OnInit {
 
-  constructor(private plantsService: PlantsService) { }
+  constructor(private plantsService: PlantsService, private axieCardService: AxieCardService) { }
 
   ngOnInit(): void {
-    console.log("config")
   }
 
 
-  public addJson(jsonInput: any) {
-    var data = JSON.parse(jsonInput);
+  public addJsonPlants(jsonInputPlants: any) {
+    var data = JSON.parse(jsonInputPlants);
     var page = 0;
     for(var i = 0; i < data.data.length; i++){
       this.plantsService.createPlant(
         {
          plant_id: data.data[i].plantId, 
-         start_time: data.data[i].startTime, 
+         hour: parseInt(data.data[i].startTime.split("T")[1].split(":")[0]), 
+         minute: parseInt(data.data[i].startTime.split("T")[1].split(":")[1]), 
+         second: parseInt(data.data[i].startTime.split("T")[1].split(":")[2].split(".")[0]), 
          page: page, 
          owner_id: data.data[i].ownerId,
          id: data.data[i]._id
         }, 
          data.data[i].plantId.toString())
-    }    
+    }
+  }
+
+  public addJsonAxie(jsonInputAxie: any) {
+    var data = JSON.parse(jsonInputAxie);
+    var page = 0;
+    for (const id in data) {
+      if (data.hasOwnProperty(id)) {
+        console.log(data[id])
+      }
+    }
   }
 
 }
