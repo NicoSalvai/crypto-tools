@@ -19,15 +19,38 @@ export class PlantsComponent implements OnInit {
   constructor(private plantsService: PlantsService) { }
 
   ngOnInit(): void { 
+    let aux_plants: Plant[] = [];
     this.plantsService.getPlants()
       .subscribe((data) => {
         for(let i = 0; i < data.length; i++){
-          this.plants.push(data[i].payload.doc.data() as Plant)
+          this.plants.push(new Plant((data[i].payload.doc.data() as Plant).plant_id,
+            (data[i].payload.doc.data() as Plant).start_time,
+            (data[i].payload.doc.data() as Plant).page,
+            (data[i].payload.doc.data() as Plant).owner_id,
+            (data[i].payload.doc.data() as Plant).id))
         }
+
+        this.plants = this.plants.sort((a, b) => {
+          if(parseInt(a.start_time.substring(11,13)) > parseInt(b.start_time.substring(11,13))){
+            return 1;
+          } else if (parseInt(a.start_time.substring(11,13)) < parseInt(b.start_time.substring(11,13))){
+            return -1;
+          }
+          if(parseInt(a.start_time.substring(14,16)) > parseInt(b.start_time.substring(14,16))){
+            return 1;
+          } else if (parseInt(a.start_time.substring(14,16)) < parseInt(b.start_time.substring(14,16))){
+            return -1;
+          }
+          if(parseInt(a.start_time.substring(17,19)) > parseInt(b.start_time.substring(17,19))){
+            return 1;
+          } else if (parseInt(a.start_time.substring(17,19)) < parseInt(b.start_time.substring(17,19))){
+            return -1;
+          }
+          return 1;
+        });
       })
-      this.plants.sort((a, b) => {
-        return <any>new Date(a.start_time) - <any>new Date(b.start_time);
-      });
+    console.log(this.plants.length)
+    console.log(this.plants)
    }
 
   public addJson(jsonInput: any) {
