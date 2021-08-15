@@ -57,24 +57,6 @@ export class PlantsComponent implements OnInit {
       })
    }
 
-  public addJson(jsonInput: any) {
-    var data = JSON.parse(jsonInput);
-    var page = 0;
-    for(var i = 0; i < data.data.length; i++){
-      this.plantsService.createPlant(
-        {
-         plant_id: data.data[i].plantId, 
-         start_time: data.data[i].startTime, 
-         page: page, 
-         owner_id: data.data[i].ownerId,
-         id: data.data[i]._id
-        }, 
-         data.data[i].plantId.toString())
-    }
-    console.log(this.plants)
-    
-  }
-
   public goToFarm(url: string){
     window.open("https://marketplace.plantvsundead.com/farm#/farm/other/" + url, "_blank");
   }
