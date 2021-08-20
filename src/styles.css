@@ -3,3 +3,11 @@ body {
     min-height: 75rem;
     padding-top: 4.5rem;
 }
+
+.axie-modal{
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: solid;
+    border-width: 1px;
+    border-color: darkgrey;
+}

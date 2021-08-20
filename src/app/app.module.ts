@@ -13,6 +13,8 @@ import { AxieComponent } from './components/axie/axie.component';
 
 import { HttpClientModule } from '@angular/common/http'
 import { AngularFireModule } from '@angular/fire';
+import {ReactiveFormsModule} from "@angular/forms";
+
 
 
 
@@ -30,7 +32,8 @@ import { AngularFireModule } from '@angular/fire';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

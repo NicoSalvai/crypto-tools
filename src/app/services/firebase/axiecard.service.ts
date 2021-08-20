@@ -14,6 +14,11 @@ export class AxieCardService {
     return this.firestore.collection('axiecards').snapshotChanges();
   }
 
+  public getAxieCardsByPart(part: string){
+    return this.firestore.collection('axiecards', ref => ref.where('part','==', part)).valueChanges();
+
+  }
+
   public updateAxieCard(documentId: string, data: AxieCard) {
     return this.firestore.collection('axiecards').doc(documentId).set(data);
   }
@@ -22,7 +27,7 @@ export class AxieCardService {
     return this.firestore.collection('axiecards').doc(documentId).snapshotChanges();
   }
 
-  public createAxieCard(data: any, id: string) {
+  public createAxieCard(data: AxieCard, id: string) {
     return this.firestore.collection('axiecards').doc(id).set(data);
   }
 

@@ -19,7 +19,7 @@ export class PlantsComponent implements OnInit {
   constructor(private plantsService: PlantsService) { }
 
   ngOnInit(): void { 
-    this.plantsService.getPlantsFilterBy(new Date().getHours())
+    this.plantsService.getPlantsFilterBy(new Date().getHours(), new Date().getMinutes())
       .subscribe((data) => {
         for(let i = 0; i < data.length; i++){
           this.plants.push(data[i] as Plant)

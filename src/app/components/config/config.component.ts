@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Plant } from '../../models/plant';
 import { PlantsService } from '../../services/firebase/plants.service';
 import { AxieCardService } from '../../services/firebase/axiecard.service';
+import { AxieCard } from 'src/app/models/axie-card';
 
 @Component({
   selector: 'app-config',
@@ -39,7 +40,8 @@ export class ConfigComponent implements OnInit {
     var page = 0;
     for (const id in data) {
       if (data.hasOwnProperty(id)) {
-        console.log(data[id])
+        console.log(data[id] as AxieCard)
+        this.axieCardService.createAxieCard(data[id],data[id].id)
       }
     }
   }

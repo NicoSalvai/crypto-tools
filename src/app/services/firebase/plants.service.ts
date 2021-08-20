@@ -14,7 +14,7 @@ export class PlantsService {
     return this.firestore.collection('plants').snapshotChanges();
   }
 
-  public getPlantsFilterBy(hour: number){
+  public getPlantsFilterBy(hour: number, minute: number){
     return this.firestore.collection('plants', ref => ref.where('hour','==', hour)).valueChanges();
   }
 
