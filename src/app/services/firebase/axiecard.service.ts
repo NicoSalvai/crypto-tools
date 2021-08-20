@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AxieCard } from 'src/app/models/axie-card';
+import { AxieCard } from 'src/app/models/axies';
 
 @Injectable({
   providedIn: 'root'

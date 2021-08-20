@@ -39,3 +39,40 @@ export class AxieCard {
         this.triggerText= triggerText;
     }
 }
+
+export class AxieType {
+    type_id: string;
+    label: string;
+    value: string;
+    constructor(type_id: string, label: string, value: string){
+        this.type_id = type_id;
+        this.label = label;
+        this.value = value;
+    }
+}
+
+export class Axie {
+    axie_type: AxieType;
+    horn: AxieCard;
+    mouth: AxieCard;
+    back: AxieCard;
+    tail: AxieCard;
+    constructor(axie_type: AxieType, horn: AxieCard, mouth: AxieCard, back: AxieCard, tail: AxieCard){
+        this.axie_type = axie_type;
+        this.horn = horn;
+        this.mouth = mouth;
+        this.back = back;
+        this.tail = tail;
+    }
+}
+
+export class AxieTeam {
+    name: string;
+    owner: string;
+    team: Axie[];
+    constructor(name: string, owner: string, team: Axie[]){
+        this.name = name;
+        this.owner = owner;
+        this.team = team;
+    }
+}

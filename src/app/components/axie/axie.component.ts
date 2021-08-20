@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AxieCard } from 'src/app/models/axie-card';
-import { AxieType } from 'src/app/models/axie-type';
+import { AxieCard, AxieType, Axie, AxieTeam } from 'src/app/models/axies';
 import { AxieCardService } from '../../services/firebase/axiecard.service';
+import { AxieteamsService } from '../../services/firebase/axieteams.service';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -31,6 +31,8 @@ export class AxieComponent implements OnInit {
 
 
   axieForm = new FormGroup({
+    "name": new FormControl("", Validators.required),
+    "owner": new FormControl("", Validators.required),
     "axieTypeOne": new FormControl("", Validators.required),
     "axieHornOne": new FormControl("", Validators.required),
     "axieMouthOne": new FormControl("", Validators.required),
@@ -47,16 +49,37 @@ export class AxieComponent implements OnInit {
     "axieBackThree": new FormControl("", Validators.required),
     "axieTailThree": new FormControl("", Validators.required)
 });
-  constructor(private axieCardService: AxieCardService) { }
+  constructor(private axieCardService: AxieCardService,
+    private axieteamsService: AxieteamsService) { }
 
   ngOnInit(): void {
   }
 
   public onSubmitAxieForm(){
-    console.log("submitedAxieForm" + this.axieForm)
+    let axie_team: AxieTeam = new AxieTeam(this.axieForm.controls.name.value,this.axieForm.controls.owner.value,[])
+    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeOne.value], 
+            this.axieHornCards[this.axieForm.controls.axieHornOne.value], 
+            this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
+            this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
+            this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
+    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeOne.value], 
+            this.axieHornCards[this.axieForm.controls.axieHornOne.value], 
+            this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
+            this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
+            this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
+    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeOne.value], 
+            this.axieHornCards[this.axieForm.controls.axieHornOne.value], 
+            this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
+            this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
+            this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
+    console.log(axie_team);
+    this.axieteamsService.createAxieTeam(axie_team);
   }
 
   public loadAxieParts(){
+    this.axieteamsService.getAxieTeams().subscribe((data) => {
+      console.log(data);
+    })
     this.axieCardService.getAxieCardsByPart("Back").subscribe((data) => {
       for(let i = 0; i < data.length; i++){
         this.axieBackCards.push(data[i] as AxieCard);

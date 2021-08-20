@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Plant } from '../../models/plant';
 import { PlantsService } from '../../services/firebase/plants.service';
 import { AxieCardService } from '../../services/firebase/axiecard.service';
-import { AxieCard } from 'src/app/models/axie-card';
+import { AxieCard } from 'src/app/models/axies';
 
 @Component({
   selector: 'app-config',
