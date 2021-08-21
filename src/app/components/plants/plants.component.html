@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="bg-light p-5 rounded">
+  <div class="bg-dark p-5 rounded">
     <h1>PVU Plants</h1>
     <p class="lead">This is the list of plants for the NFT game PVU</p>
     <div class="container">
@@ -18,8 +18,8 @@
             <th scope="row">{{plant.plant_id}}</th>
             <td>{{plant.hour}}:{{plant.minute}}:{{plant.second}}</td>
             <td>{{plant.page}}</td>
-            <td><a class="btn btn-small btn-info" (click)="goToFarm(plant.owner_id)">Go to land</a></td>
-            <td><a class="btn btn-small btn-info" (click)="goToPlant(plant.id)">Go to Plant</a></td>
+            <td><a class="btn btn-small btn-outline-info btn-dark" (click)="goToFarm(plant.owner_id)">Go to land</a></td>
+            <td><a class="btn btn-small btn-outline-info btn-dark" (click)="goToPlant(plant.id)">Go to Plant</a></td>
           </tr>
         </tbody>
     </table>
