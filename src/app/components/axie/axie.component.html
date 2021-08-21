@@ -2,10 +2,13 @@
     <div class="bg-light p-5 rounded">
         <h1>Axie Deck Tracker</h1>
         <p class="lead">Lorem ipsum</p>
-        <button class="btn btn-lg btn-info " type="submit" (click)="loadAxieParts()">Submit</button>
+        <div class="row">
+            <button class="btn btn-lg btn-primary col-sm-2 offset-sm-3 col-8 offset-2" type="submit" (click)="createAxieTeamMode()">Create Axie Team</button>
+            <button class="btn btn-lg btn-success col-sm-2 col-8 offset-2" type="submit" (click)="playTeamMode()">Play Team</button>
+        </div>
     </div>
     <br>
-    <div class="bg-light p-5 rounded">
+    <div class="bg-light p-5 rounded" id="createAxieTeamForm" [hidden]="!createAxieTeam">
         <div class="container">
             <form id="create_axie_team" [formGroup]="axieForm" (ngSubmit)="onSubmitAxieForm()">
                 <div class="form-group">
@@ -123,6 +126,40 @@
                     <button class="btn btn-lg btn-success " type="submit" [disabled]="!axieForm.valid">Submit</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="bg-light p-5 rounded" id="play" [hidden]="!play">
+        <div class="container">
+            <div class="row">
+                <input type="text" id="team_key" class="col-9" #team_key placeholder="team_owner">
+                <button class="btn btn-success col-2 offset-1" (click)="loadTeams(team_key.value)" >Load teams</button>
+            </div>      
+            <div class="row" style="margin-top: 1rem;" >
+                <select class="col-5" #team_key_name>
+                    <option *ngFor="let team of axieTeams; index as i; first as isFirst" value="{{team.name}}">{{team.name}}</option>
+                </select>
+                <button class="btn btn-success col-2 offset-1" (click)="chooseTeam(team_key_name.value)" >Choose</button>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light p-5 rounded" id="playing" [hidden]="!playing">
+        <button class="btn btn-dark col-10 offset-1" (click)="resetFight()">New Fight</button>
+        <p style="text-align: center;">Enemy Energy</p>
+        <div class="row">
+            <button class="btn btn-warning col-2" (click)="changeEnergy(-1)">-</button>
+            <div class="col">
+                <p style="text-align: center;">{{currentEnergy}}</p>
+            </div>
+            <button class="btn btn-warning col-2" (click)="changeEnergy(1)">+</button>
+        </div>
+        <div class="container" *ngFor="let deck of currentDeck; index as i; first as isFirst">
+            <button class="btn btn-danger" style="margin-top: 0.5rem;margin-bottom: 0.5rem;" (click)="killDeck(deck)">Death</button>
+            <ul class="list-group" [hidden]="!deck.alive">
+                <button *ngFor="let card of deck.deck; index as i; first as isFirst" class="list-group-item" (click)="clickOnCard(card)" >{{card.card.skillName}} <span style="float:right">{{card.left}} </span></button>
+            </ul>
+        </div>
+        <div class="container" style="margin-top: 1rem;">
+            <button class="btn btn-dark col-10 offset-1" (click)="resetDeck()">Reset Deck</button>
         </div>
     </div>
 </div>

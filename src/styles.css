@@ -11,3 +11,7 @@ body {
     border-width: 1px;
     border-color: darkgrey;
 }
+
+.dead{
+    background-color: darkslategray!important;
+}

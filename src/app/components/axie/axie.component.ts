@@ -12,22 +12,30 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class AxieComponent implements OnInit {
 
+  axieTeams: AxieTeam[] = [];
+  currentAxieTeam: AxieTeam = new AxieTeam("","",[]);
+
   axieHornCards: AxieCard[] = [];
   axieMouthCards: AxieCard[] = [];
   axieBackCards: AxieCard[] = [];
   axieTailCards: AxieCard[] = [];
 
   createAxieTeam: boolean = false;
+  play: boolean = false;
+  playing: boolean = false;
+
+  currentDeck: any[] = [];
+  currentEnergy: number = 3;
 
   axieTypes: AxieType[] = [new AxieType("1","Aquatic","aquatic"),
-        new AxieType("1","Beast","beast"),
-        new AxieType("1","Bird","bird"),
-        new AxieType("1","Bug","bug"),
-        new AxieType("1","Plant","plant"),
-        new AxieType("1","Reptile","reptile"),
-        new AxieType("1","Mech","mech"),
-        new AxieType("1","Dawn","dawn"),
-        new AxieType("1","Dusk","dusk")]
+        new AxieType("2","Beast","beast"),
+        new AxieType("3","Bird","bird"),
+        new AxieType("4","Bug","bug"),
+        new AxieType("5","Plant","plant"),
+        new AxieType("6","Reptile","reptile"),
+        new AxieType("7","Mech","mech"),
+        new AxieType("8","Dawn","dawn"),
+        new AxieType("9","Dusk","dusk")]
 
 
   axieForm = new FormGroup({
@@ -76,10 +84,89 @@ export class AxieComponent implements OnInit {
     this.axieteamsService.createAxieTeam(axie_team);
   }
 
-  public loadAxieParts(){
-    this.axieteamsService.getAxieTeams().subscribe((data) => {
-      console.log(data);
+
+  public createAxieTeamMode(){
+    if(this.axieBackCards.length == 0){
+      this.loadAxieParts()
+    }
+    this.play = false;
+    this.playing = false;
+    this.createAxieTeam = true;
+  }
+
+  public playTeamMode(){
+    this.createAxieTeam = false;
+    this.playing = false;
+    this.play = true;
+    this.axieForm.reset();
+  }
+
+  public loadTeams(team_key: string){
+    this.axieteamsService.getAxieTeamsByOwner(team_key).subscribe((data) => {
+      for(let i = 0; i < data.length; i++){
+        this.axieTeams.push(data[i] as AxieTeam);
+      }
     })
+  }
+
+  public chooseTeam(team_name: any){
+    this.currentAxieTeam = this.axieTeams.filter(team => team.name == team_name)[0];
+    this.createAxieTeam = false;
+    this.play = false;
+    this.playing = true;
+    this.loadDeck()
+  }
+
+  public loadDeck(){
+    this.currentAxieTeam.team.forEach(axie => {
+      this.currentDeck.push({ alive: true, deck:
+        [{card: axie.horn, left: 2}, 
+        {card: axie.mouth, left: 2}, 
+        {card: axie.back, left: 2}, 
+        {card: axie.tail, left: 2}]})
+    });
+  }
+
+  public clickOnCard(card:any){
+    if(card.left == 0){
+      card.left = 2;
+    } else {
+      card.left--;
+    }
+  }
+
+  public changeEnergy(value: number){
+    this.currentEnergy += value;
+  }
+
+  public resetFight(){
+    this.currentEnergy = 3;
+    this.currentDeck.forEach(subDeck => {
+      subDeck.alive = true;
+      subDeck.deck.forEach((card: any) => {
+        card.left = 2;
+      });
+    });
+  }
+
+  public resetDeck(){
+    this.currentDeck.forEach(subDeck => {
+      if(subDeck.alive){
+        subDeck.deck.forEach((card: any) => {
+          card.left = 2;
+        });
+      }
+    });
+  }
+
+  public killDeck(deck: any){
+    if(deck.alive)
+      deck.alive = false;
+    else
+      deck.alive = true;
+  }
+
+  public loadAxieParts(){
     this.axieCardService.getAxieCardsByPart("Back").subscribe((data) => {
       for(let i = 0; i < data.length; i++){
         this.axieBackCards.push(data[i] as AxieCard);
