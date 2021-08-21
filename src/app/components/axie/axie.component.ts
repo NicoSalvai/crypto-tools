@@ -70,18 +70,19 @@ export class AxieComponent implements OnInit {
             this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
             this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
             this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
-    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeOne.value], 
-            this.axieHornCards[this.axieForm.controls.axieHornOne.value], 
-            this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
-            this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
-            this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
-    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeOne.value], 
-            this.axieHornCards[this.axieForm.controls.axieHornOne.value], 
-            this.axieMouthCards[this.axieForm.controls.axieMouthOne.value], 
-            this.axieBackCards[this.axieForm.controls.axieBackOne.value], 
-            this.axieTailCards[this.axieForm.controls.axieTailOne.value]))
+    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeTwo.value], 
+            this.axieHornCards[this.axieForm.controls.axieHornTwo.value], 
+            this.axieMouthCards[this.axieForm.controls.axieMouthTwo.value], 
+            this.axieBackCards[this.axieForm.controls.axieBackTwo.value], 
+            this.axieTailCards[this.axieForm.controls.axieTailTwo.value]))
+    axie_team.team.push(new Axie(this.axieTypes[this.axieForm.controls.axieTypeThree.value], 
+            this.axieHornCards[this.axieForm.controls.axieHornThree.value], 
+            this.axieMouthCards[this.axieForm.controls.axieMouthThree.value], 
+            this.axieBackCards[this.axieForm.controls.axieBackThree.value], 
+            this.axieTailCards[this.axieForm.controls.axieTailThree.value]))
     console.log(axie_team);
     this.axieteamsService.createAxieTeam(axie_team);
+    this.axieForm.reset();
   }
 
 
@@ -171,21 +172,33 @@ export class AxieComponent implements OnInit {
       for(let i = 0; i < data.length; i++){
         this.axieBackCards.push(data[i] as AxieCard);
       }
+      this.axieBackCards = this.axieBackCards.sort((a,b) => {
+        return a.skillName.localeCompare(b.skillName);
+      })
     });
     this.axieCardService.getAxieCardsByPart("Horn").subscribe((data) => {
       for(let i = 0; i < data.length; i++){
         this.axieHornCards.push(data[i] as AxieCard);
       }
+      this.axieHornCards = this.axieHornCards.sort((a,b) => {
+        return a.skillName.localeCompare(b.skillName);
+      })
     });
     this.axieCardService.getAxieCardsByPart("Mouth").subscribe((data) => {
       for(let i = 0; i < data.length; i++){
         this.axieMouthCards.push(data[i] as AxieCard);
       }
+      this.axieMouthCards = this.axieMouthCards.sort((a,b) => {
+        return a.skillName.localeCompare(b.skillName);
+      })
     });
     this.axieCardService.getAxieCardsByPart("Tail").subscribe((data) => {
       for(let i = 0; i < data.length; i++){
         this.axieTailCards.push(data[i] as AxieCard);
       }
+      this.axieTailCards = this.axieTailCards.sort((a,b) => {
+        return a.skillName.localeCompare(b.skillName);
+      })
     });
   }
 }
